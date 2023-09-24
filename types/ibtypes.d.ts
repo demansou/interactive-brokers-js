@@ -1,11 +1,11 @@
-declare module 'ib-types' {
-    interface Account {
+declare module 'IBTypes' {
+    export interface Account {
         [key: number]: string
     }
-    interface AccountAlias {
+    export interface AccountAlias {
         [key: string]: string
     }
-    interface AccountData {
+    export interface AccountData {
         amount: number
         currency: string | null
         isNull: boolean
@@ -13,7 +13,7 @@ declare module 'ib-types' {
         value: string
         severity: number
     }
-    interface AccountFeatures {
+    export interface AccountFeatures {
         showGfis: boolean
         showEuCostReport: boolean
         allowFxConv: boolean
@@ -32,10 +32,10 @@ declare module 'ib-types' {
         allowCrypto: boolean
         allowedAssetTypes: string
     }
-    interface AccountProps {
+    export interface AccountProps {
         [key: string]: AccountPropOptions
     }
-    interface AccountPropOptions {
+    export interface AccountPropOptions {
         hasChildAccounts: boolean
         supportsCashQty: boolean
         noFxConv: boolean
@@ -43,12 +43,12 @@ declare module 'ib-types' {
         supportsFractions: boolean
         allowCustomerTime: boolean
     }
-    interface AccountSummary {
+    export interface AccountSummary {
         [key: string]: AccountData
         availableFunds: AccountData
         buyingPower: AccountData
     }
-    interface AuthenticationStatus {
+    export interface AuthenticationStatus {
         authenticated: boolean
         competing: boolean
         connected: boolean
@@ -57,7 +57,7 @@ declare module 'ib-types' {
         serverInfo: ServerInfo
         fail: string
     }
-    interface BrokerageAccounts {
+    export interface BrokerageAccounts {
         accounts: Account[]
         acctProps: AccountProps,
         aliases: AccountAlias
@@ -71,25 +71,25 @@ declare module 'ib-types' {
         isFt: boolean
         isPaper: boolean
     }
-    interface ChartPeriod {
+    export interface ChartPeriod {
         [key: number]: string
     }
-    interface ChartPeriods {
+    export interface ChartPeriods {
         [key: string]: ChartPeriod[]
     }
-    interface DisplayRule {
+    export interface DisplayRule {
         magnification: number
         displayRuleStep: DisplayRuleSteps
     }
-    interface DisplayRuleStep {
+    export interface DisplayRuleStep {
         decimalDigits: number
         lowerEdge: number
         wholeDigit: number
     }
-    interface DisplayRuleSteps {
+    export interface DisplayRuleSteps {
         [key: number]: DisplayRuleStep
     }
-    interface FuturesInfo {
+    export interface FuturesInfo {
         symbol: string
         conid: number
         underlyingConid: number
@@ -98,14 +98,14 @@ declare module 'ib-types' {
         shortFuturesCutOff: number
         longFuturesCutOff: number
     }
-    interface IncrementRule {
+    export interface IncrementRule {
         lowerEdge: number
         increment: number
     }
-    interface IncrementRules {
+    export interface IncrementRules {
         [key: number]: IncrementRule
     }
-    interface MarketData {
+    export interface MarketData {
         31: string
         84: string
         85: string
@@ -120,10 +120,10 @@ declare module 'ib-types' {
         conId: number
         server_id: string
     }
-    interface MarketDataAggregate {
+    export interface MarketDataAggregate {
         [key: number]: MarketData
     }
-    interface Order {
+    export interface Order {
         acctId: string
         conid: number
         conidex: string
@@ -142,15 +142,15 @@ declare module 'ib-types' {
         isCcyConv: boolean
         allocationMethod: "AvailableEquity"
     }
-    interface Orders {
+    export interface Orders {
         orders: Order[]
     }
     type OrdersFeedback = OrderFeedback[]
-    interface OrderFeedback {
+    export interface OrderFeedback {
         id: string
         message: string[]
     }
-    interface Position {
+    export interface Position {
         acctId: string
         conId: number
         contractDesc: string
@@ -194,27 +194,27 @@ declare module 'ib-types' {
         isEventContract: boolean
         pageSize: number
     }
-    interface PositionByContractId {
+    export interface PositionByContractId {
         [key: number]: Position
     }
-    interface SecurityFutures {
+    export interface SecurityFutures {
         [key: string]: FuturesInfo[]
     }
-    interface ServerInfo {
+    export interface ServerInfo {
         serverName: string
         serverVersion: string
     }
-    interface WhatIfAmount {
+    export interface WhatIfAmount {
         amount: string
         commission: string
         total: string
     }
-    interface WhatIfChange {
+    export interface WhatIfChange {
         current: string
         change: string
         after: string
     }
-    interface WhatIfOrdersFeedback {
+    export interface WhatIfOrdersFeedback {
         amount: WhatIfAmount
         equity: WhatIfChange
         initial: WhatIfChange

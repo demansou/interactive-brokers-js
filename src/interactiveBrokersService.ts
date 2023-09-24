@@ -1,6 +1,6 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import https from 'https';
-import { AccountSummary, AuthenticationStatus, BrokerageAccounts, MarketDataAggregate, Orders, OrdersFeedback, PositionByContractId, SecurityFutures, WhatIfOrdersFeedback } from 'ib-types';
+import { AccountSummary, AuthenticationStatus, BrokerageAccounts, MarketDataAggregate, Orders, OrdersFeedback, PositionByContractId, SecurityFutures, WhatIfOrdersFeedback } from 'IBTypes';
 
 class InteractiveBrokersService {
     private baseUrl: string;
