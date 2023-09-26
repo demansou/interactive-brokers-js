@@ -1,6 +1,3 @@
-Certainly! Here's the markdown for the README:
-
-```markdown
 # Interactive Brokers Client Portal API Wrapper
 
 [![npm version](https://badge.fury.io/js/ib-clientportal-api.svg)](https://badge.fury.io/js/ib-clientportal-api)
@@ -63,6 +60,3 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Contributing
 
 We welcome contributions! Please feel free to submit issues, create pull requests, or share your feedback.
-```
-
-You can copy and paste this markdown into your README.md file, replacing placeholders and adjusting links and details as needed for your npm package.
