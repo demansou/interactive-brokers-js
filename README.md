@@ -1,6 +1,6 @@
 # Interactive Brokers Client Portal API Wrapper
 
-[![npm version](https://badge.fury.io/js/ib-clientportal-api.svg)](https://badge.fury.io/js/ib-clientportal-api)
+[![npm version](https://badge.fury.io/js/interactive-brokers-js.svg)](https://badge.fury.io/js/interactive-brokers-js)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A Node.js wrapper for the Interactive Brokers Client Portal API Gateway using the Docker container provided by [voyz](https://github.com/Voyz/ibeam). This package simplifies the process of connecting to and interacting with the Interactive Brokers Client Portal API.
