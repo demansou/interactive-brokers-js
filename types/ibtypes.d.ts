@@ -145,10 +145,13 @@ declare module 'IBTypes' {
     export interface Orders {
         orders: Order[]
     }
-    type OrdersFeedback = OrderFeedback[]
+    export type OrdersFeedback = OrderFeedback[]
     export interface OrderFeedback {
         id: string
         message: string[]
+    }
+    export interface OrdersFeedbackReply {
+        confirmed: boolean
     }
     export interface Position {
         acctId: string

@@ -1,6 +1,6 @@
 {
   "name": "interactive-brokers-js",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Service for Interactive Brokers Client Portal",
   "main": "dist/index.js",
   "scripts": {
