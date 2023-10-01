@@ -150,6 +150,11 @@ declare module 'IBTypes' {
         id: string
         message: string[]
     }
+    export interface OrderReplyResponse extends OrderFeedback {
+        'order_id': string
+        'order_status': string
+        'local_order_id': string
+    }
     export interface OrdersFeedbackReply {
         confirmed: boolean
     }

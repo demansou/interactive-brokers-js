@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import https from 'https';
-import { AccountSummary, AuthenticationStatus, BrokerageAccounts, MarketDataAggregate, Orders, OrdersFeedback, OrdersFeedbackReply, PositionByContractId, SecurityFutures, WhatIfOrdersFeedback } from 'IBTypes';
+import { AccountSummary, AuthenticationStatus, BrokerageAccounts, MarketDataAggregate, Orders, OrdersFeedback, OrdersFeedbackReply, OrderReplyResponse, PositionByContractId, SecurityFutures, WhatIfOrdersFeedback } from 'IBTypes';
 
 class InteractiveBrokersService {
     private baseUrl: string;
@@ -41,7 +41,7 @@ class InteractiveBrokersService {
         return await this.post(`/iserver/account/${accountId}/orders`, order);
     }
 
-    async postOrderReply(replyId: string, feedbackReply: OrdersFeedbackReply): Promise<OrdersFeedback> {
+    async postOrderReply(replyId: string, feedbackReply: OrdersFeedbackReply): Promise<OrderReplyResponse[]> {
         return await this.post(`/iserver/reply/${replyId}`, feedbackReply);
     }
 
