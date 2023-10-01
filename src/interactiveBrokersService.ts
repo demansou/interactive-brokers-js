@@ -1,86 +1,64 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import https from 'https';
 import * as IBTypes from 'IBTypes';
+import IBContractService from './ibContractService';
+import IBSessionService from './ibSessionService';
 
 class InteractiveBrokersService {
     private baseUrl: string;
+    private contractService: IBContractService;
+    private sessionService: IBSessionService;
 
     constructor(baseUrl: string) {
         this.baseUrl = baseUrl;
+        this.contractService = new IBContractService(baseUrl);
+        this.sessionService = new IBSessionService(baseUrl);
     }
 
     // Session
     async tickle(): Promise<void> {
-        const config: AxiosRequestConfig = {
-            method: 'POST',
-            url: `${this.baseUrl}/tickle`,
-            headers: {
-                'Accept': '*/*',
-            },
-            httpsAgent: new https.Agent({
-                rejectUnauthorized: false,
-            }),
-        };
-        await this.makeRequest(config);
+        await this.sessionService.tickle();
     }
 
     async logout(): Promise<IBTypes.LogoutConfirmation> {
-        const config: AxiosRequestConfig = {
-            method: 'POST',
-            url: `${this.baseUrl}/logout`,
-            headers: {
-                'Accept': 'application/json',
-            },
-            httpsAgent: new https.Agent({
-                rejectUnauthorized: false,
-            }),
-        };
-        return await this.makeRequest(config);
+        return await this.sessionService.logout();
     }
 
     async ssoValidate(): Promise<IBTypes.SsoValidationInfo> {
-        return await this.get('/sso/validate');
+        return await this.sessionService.ssoValidate();
     }
 
     async getAuthenticationStatus(): Promise<IBTypes.AuthenticationStatus> {
-        return await this.get('/iserver/auth/status');
+        return await this.sessionService.getAuthenticationStatus();
     }
 
     async reauthenticate(): Promise<IBTypes.ReauthenticationStatus> {
-        const config: AxiosRequestConfig = {
-            method: 'POST',
-            url: `${this.baseUrl}/iserver/reauthenticate`,
-            headers: {
-                'Accept': 'application/json',
-            },
-            httpsAgent: new https.Agent({
-                rejectUnauthorized: false,
-            }),
-        };
-        return await this.makeRequest(config);
+        return await this.sessionService.reauthenticate();
     }
 
     // Contract
 
     async secdefByConid(conids: number[]): Promise<IBTypes.SecurityDefinition[]> {
-        return await this.post('/trsrv/secdef', { conids: conids });
+        return await this.contractService.secdefByConid(conids);
     }
 
     async getTradingScheduleForSymbol(assetClass: string, symbol: string, exchange: string, exchangeFilter: string): Promise<IBTypes.TradingScheduleForSymbol> {
-        return await this.get(`/trsrv/secdef/schedule?assetClass=${assetClass}&symbol=${symbol}&exchange=${exchange}&exchangeFilter=${exchangeFilter}`);
+        return await this.contractService.getTradingScheduleForSymbol(assetClass, symbol, exchange, exchangeFilter);
     }
 
     async getSecurityFuturesBySymbol(symbols: string[]): Promise<IBTypes.SecurityFutures> {
-        return await this.get(`/trsrv/futures?symbols=${symbols.join(',')}`);
+        return await this.contractService.getSecurityFuturesBySymbol(symbols);
     }
 
     async getSecurityStocksBySymbol(symbols: string[]): Promise<IBTypes.SecurityStocks> {
-        return await this.get(`/trsrv/stocks?symbols=${symbols.join(',')}`);
+        return await this.contractService.getSecurityStocksBySymbol(symbols);
     }
 
     async getContractDetails(conid: number): Promise<IBTypes.ContractDetails> {
-        return await this.get(`/iserver/contract/${conid}/info`);
+        return await this.contractService.getContractDetails(conid);
     }
+
+    
 
     async getBrokerageAccounts(): Promise<IBTypes.BrokerageAccounts> {
         return await this.get(`/iserver/accounts`);
