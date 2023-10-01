@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import https from 'https';
-import { AccountSummary, AuthenticationStatus, BrokerageAccounts, MarketDataAggregate, Orders, OrdersFeedback, OrdersFeedbackReply, OrderReplyResponse, PositionByContractId, SecurityFutures, WhatIfOrdersFeedback } from 'IBTypes';
+import * as IBTypes from 'IBTypes';
 
 class InteractiveBrokersService {
     private baseUrl: string;
@@ -9,39 +9,86 @@ class InteractiveBrokersService {
         this.baseUrl = baseUrl;
     }
 
-    async getBrokerageAccounts(): Promise<BrokerageAccounts> {
-        return await this.get(`/iserver/accounts`);
+    // Session
+    async tickle(): Promise<void> {
+        const config: AxiosRequestConfig = {
+            method: 'POST',
+            url: `${this.baseUrl}/tickle`,
+            headers: {
+                'Accept': '*/*',
+            },
+            httpsAgent: new https.Agent({
+                rejectUnauthorized: false,
+            }),
+        };
+        await this.makeRequest(config);
     }
 
-    async getAuthenticationStatus(): Promise<AuthenticationStatus> {
+    async logout(): Promise<IBTypes.LogoutConfirmation> {
+        const config: AxiosRequestConfig = {
+            method: 'POST',
+            url: `${this.baseUrl}/logout`,
+            headers: {
+                'Accept': 'application/json',
+            },
+            httpsAgent: new https.Agent({
+                rejectUnauthorized: false,
+            }),
+        };
+        return await this.makeRequest(config);
+    }
+
+    async ssoValidate(): Promise<IBTypes.SsoValidationInfo> {
+        return await this.get('/sso/validate');
+    }
+
+    async getAuthenticationStatus(): Promise<IBTypes.AuthenticationStatus> {
         return await this.get('/iserver/auth/status');
     }
 
-    async getMarketData(conIds: number[], since: number, fields: number[]): Promise<MarketDataAggregate> {
+    async reauthenticate(): Promise<IBTypes.ReauthenticationStatus> {
+        const config: AxiosRequestConfig = {
+            method: 'POST',
+            url: `${this.baseUrl}/iserver/reauthenticate`,
+            headers: {
+                'Accept': 'application/json',
+            },
+            httpsAgent: new https.Agent({
+                rejectUnauthorized: false,
+            }),
+        };
+        return await this.makeRequest(config);
+    }
+
+    async getBrokerageAccounts(): Promise<IBTypes.BrokerageAccounts> {
+        return await this.get(`/iserver/accounts`);
+    }
+
+    async getMarketData(conIds: number[], since: number, fields: number[]): Promise<IBTypes.MarketDataAggregate> {
         return await this.get(`/iserver/marketdata/snapshot?conids=${conIds.join(',')}&since=${since}&fields=${fields.join(',')}`)
     }
 
-    async getAccountSummary(accountId: string): Promise<AccountSummary> {
+    async getAccountSummary(accountId: string): Promise<IBTypes.AccountSummary> {
         return await this.get(`/portfolio/${accountId}/summary`);
     }
 
-    async getPositionByContractId(accountId: string, conId: number): Promise<PositionByContractId> {
+    async getPositionByContractId(accountId: string, conId: number): Promise<IBTypes.PositionByContractId> {
         return await this.get(`/portfolio/${accountId}/position/${conId}`);
     }
 
-    async getSecurityFuturesBySymbol(symbols: string[]): Promise<SecurityFutures> {
+    async getSecurityFuturesBySymbol(symbols: string[]): Promise<IBTypes.SecurityFutures> {
         return await this.get(`/trsrv/futures?symbols=${symbols.join(',')}`);
     }
 
-    async postPreviewOrder(accountId: string, order: Orders): Promise<WhatIfOrdersFeedback> {
+    async postPreviewOrder(accountId: string, order: IBTypes.Orders): Promise<IBTypes.WhatIfOrdersFeedback> {
         return await this.post(`/iserver/account/${accountId}/orders/whatif`, order);
     }
 
-    async postOrder(accountId: string, order: Orders): Promise<OrdersFeedback> {
+    async postOrder(accountId: string, order: IBTypes.Orders): Promise<IBTypes.OrdersFeedback> {
         return await this.post(`/iserver/account/${accountId}/orders`, order);
     }
 
-    async postOrderReply(replyId: string, feedbackReply: OrdersFeedbackReply): Promise<OrderReplyResponse[]> {
+    async postOrderReply(replyId: string, feedbackReply: IBTypes.OrdersFeedbackReply): Promise<IBTypes.OrderReplyResponse[]> {
         return await this.post(`/iserver/reply/${replyId}`, feedbackReply);
     }
 
@@ -50,7 +97,7 @@ class InteractiveBrokersService {
             method: 'GET',
             url: `${this.baseUrl}${path}`,
             headers: {
-                'Accept': 'application/json'
+                'Accept': 'application/json',
             },
             httpsAgent: new https.Agent({
                 rejectUnauthorized: false,

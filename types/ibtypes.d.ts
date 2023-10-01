@@ -105,6 +105,9 @@ declare module 'IBTypes' {
     export interface IncrementRules {
         [key: number]: IncrementRule
     }
+    export interface LogoutConfirmation {
+        confirmed: boolean
+    }
     export interface MarketData {
         31: string
         84: string
@@ -205,12 +208,28 @@ declare module 'IBTypes' {
     export interface PositionByContractId {
         [key: number]: Position
     }
+    export interface ReauthenticationStatus {
+        authenticated: boolean
+        connected: boolean
+        competing: boolean
+        fail: string
+        message: string
+        prompts: string[]
+    }
     export interface SecurityFutures {
         [key: string]: FuturesInfo[]
     }
     export interface ServerInfo {
         serverName: string
         serverVersion: string
+    }
+    export interface SsoValidationInfo {
+        LOGIN_TYPE: number
+        USER_NAME: string
+        USER_ID: number
+        expire: number
+        RESULT: boolean
+        AUTH_TIME: number
     }
     export interface WhatIfAmount {
         amount: string
