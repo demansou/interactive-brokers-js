@@ -3,16 +3,19 @@ import https from 'https';
 import * as IBTypes from 'IBTypes';
 import IBContractService from './ibContractService';
 import IBSessionService from './ibSessionService';
+import IBMarketDataService from './ibMarketDataService';
 
 class InteractiveBrokersService {
     private baseUrl: string;
     private contractService: IBContractService;
     private sessionService: IBSessionService;
+    private marketDataService: IBMarketDataService;
 
     constructor(baseUrl: string) {
         this.baseUrl = baseUrl;
         this.contractService = new IBContractService(baseUrl);
         this.sessionService = new IBSessionService(baseUrl);
+        this.marketDataService = new IBMarketDataService(baseUrl);
     }
 
     // Session
@@ -58,7 +61,33 @@ class InteractiveBrokersService {
         return await this.contractService.getContractDetails(conid);
     }
 
-    
+    async searchBySymbolOrName(symbolOrName: string, isName: boolean, securityType: string): Promise<IBTypes.SecuritySearchResult> {
+        return await this.contractService.searchBySymbolOrName(symbolOrName, isName, securityType);
+    }
+
+    async searchStrikes(conid: number, securityType: string, month: string, exchange: string | undefined): Promise<any> {
+        return await this.contractService.searchStrikes(conid, securityType, month, exchange);
+    }
+
+    async getSecdefInfo(conid: number, securityType: string, month: string | undefined, exchange: string | undefined, strike: number | undefined, right: string | undefined): Promise<any> {
+        return await this.contractService.getSecdefInfo(conid, securityType, month, exchange, strike, right);
+    }
+
+    async getAlgoParams(conid: number, algos: string[], addDescription: 0 | 1, addParams: 0 | 1): Promise<any> {
+        return await this.contractService.getAlgoParams(conid, algos, addDescription, addParams);
+    }
+
+    async postContractRules(conid: number, isBuy: boolean): Promise<any> {
+        return await this.contractService.postContractRules(conid, isBuy);
+    }
+
+    async getInfoAndRules(conid: number, isBuy: boolean): Promise<any> {
+        return await this.contractService.getInfoAndRules(conid, isBuy);
+    }
+
+    // Market Data
+
+
 
     async getBrokerageAccounts(): Promise<IBTypes.BrokerageAccounts> {
         return await this.get(`/iserver/accounts`);
