@@ -28,16 +28,24 @@ class IBContractService extends BaseService {
         return await this.get(`/iserver/contract/${conid}/info`);
     }
 
-    async searchBySymbolOrName(symbol: string, isName: boolean, secType: string): Promise<IBTypes.SecuritySearchResult> {
+    async searchBySymbolOrName(symbol: string, isName: boolean, securityType: string): Promise<IBTypes.SecuritySearchResult> {
         const searchTerms: IBTypes.SecuritySearchTerms = {
             symbol: symbol,
             name: isName,
-            secType: secType
+            secType: securityType
         };
         return await this.post('/iserver/secdef/search', searchTerms);
     }
 
+    async searchStrikes(conid: number, securityType: string, month: string, exchange: string | undefined): Promise<any> {
+        throw Error('Not yet implemented!');
+    }
 
+    async getSecdefInfo(conid: number, securityType: string, month: string | undefined, exchange: string | undefined, strike: number | undefined, right: string | undefined): Promise<any> {
+        throw Error('Not yet implemented!');
+    }
+
+    
 }
 
 export default IBContractService;
