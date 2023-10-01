@@ -87,14 +87,13 @@ class InteractiveBrokersService {
 
     // Market Data
 
+    async getMarketData(conIds: number[], since: number, fields: number[]): Promise<IBTypes.MarketDataAggregate> {
+        return await this.marketDataService.getMarketData(conIds, since, fields);
+    }
 
 
     async getBrokerageAccounts(): Promise<IBTypes.BrokerageAccounts> {
         return await this.get(`/iserver/accounts`);
-    }
-
-    async getMarketData(conIds: number[], since: number, fields: number[]): Promise<IBTypes.MarketDataAggregate> {
-        return await this.get(`/iserver/marketdata/snapshot?conids=${conIds.join(',')}&since=${since}&fields=${fields.join(',')}`)
     }
 
     async getAccountSummary(accountId: string): Promise<IBTypes.AccountSummary> {
