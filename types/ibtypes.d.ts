@@ -77,6 +77,31 @@ declare module 'IBTypes' {
     export interface ChartPeriods {
         [key: string]: ChartPeriod[]
     }
+    export interface ContractDetails {
+        r_t_h: boolean
+        con_id: string
+        company_name: string
+        exchange: string
+        local_symbol: string
+        instrument_type: string
+        currency: string
+        companyName: string
+        category: string
+        industry: string
+        rules: ContractRules
+    }
+    export interface ContractRules {
+        orderTypes: string[]
+        orderTypesOutside: string[]
+        defaultSize: number
+        sizeIncrement: number
+        tifTypes: string[]
+        limitPrice: number
+        stopprice: number
+        preview: boolean
+        displaySize: string
+        increment: string
+    }
     export interface DisplayRule {
         magnification: number
         displayRuleStep: DisplayRuleSteps
@@ -247,6 +272,9 @@ declare module 'IBTypes' {
     export interface SecurityFutures {
         [key: string]: FuturesInfo[]
     }
+    export interface SecurityStocks {
+        [key: string]: StocksInfo[]
+    }
     export interface ServerInfo {
         serverName: string
         serverVersion: string
@@ -258,6 +286,16 @@ declare module 'IBTypes' {
         expire: number
         RESULT: boolean
         AUTH_TIME: number
+    }
+    export interface StockContractInfo {
+        conid: string
+        exchange: string
+    }
+    export interface StocksInfo {
+        name: string
+        chineseName: string
+        assetClass: string
+        contracts: StockContractInfo[]
     }
     export interface TradingSchedule {
         clearingCycleEndTime: number

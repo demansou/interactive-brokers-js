@@ -70,6 +70,18 @@ class InteractiveBrokersService {
         return await this.get(`/trsrv/secdef/schedule?assetClass=${assetClass}&symbol=${symbol}&exchange=${exchange}&exchangeFilter=${exchangeFilter}`);
     }
 
+    async getSecurityFuturesBySymbol(symbols: string[]): Promise<IBTypes.SecurityFutures> {
+        return await this.get(`/trsrv/futures?symbols=${symbols.join(',')}`);
+    }
+
+    async getSecurityStocksBySymbol(symbols: string[]): Promise<IBTypes.SecurityStocks> {
+        return await this.get(`/trsrv/stocks?symbols=${symbols.join(',')}`);
+    }
+
+    async getContractDetails(conid: number): Promise<IBTypes.ContractDetails> {
+        return await this.get(`/iserver/contract/${conid}/info`);
+    }
+
     async getBrokerageAccounts(): Promise<IBTypes.BrokerageAccounts> {
         return await this.get(`/iserver/accounts`);
     }
@@ -84,10 +96,6 @@ class InteractiveBrokersService {
 
     async getPositionByContractId(accountId: string, conId: number): Promise<IBTypes.PositionByContractId> {
         return await this.get(`/portfolio/${accountId}/position/${conId}`);
-    }
-
-    async getSecurityFuturesBySymbol(symbols: string[]): Promise<IBTypes.SecurityFutures> {
-        return await this.get(`/trsrv/futures?symbols=${symbols.join(',')}`);
     }
 
     async postPreviewOrder(accountId: string, order: IBTypes.Orders): Promise<IBTypes.WhatIfOrdersFeedback> {
