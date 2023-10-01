@@ -216,6 +216,34 @@ declare module 'IBTypes' {
         message: string
         prompts: string[]
     }
+    export interface SecurityDefinition {
+        conid: number
+        currency: string
+        crossCurrency: string
+        time: number
+        chineseName: string
+        allExchanges: string
+        listingExchange: string
+        name: string
+        assetClass: string
+        expiry: string
+        lastTradingDay: string
+        group: string
+        putOrCall: string
+        sector: string
+        sectorGroup: string
+        strike: number
+        ticker: string
+        undConid: number
+        multiplier: number
+        type: string
+        undComp: string
+        undSym: string
+        hasOptions: boolean
+        fullName: string
+        isUS: boolean
+        incrementRule: IncrementRule
+    }
     export interface SecurityFutures {
         [key: string]: FuturesInfo[]
     }

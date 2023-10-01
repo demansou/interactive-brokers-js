@@ -60,6 +60,12 @@ class InteractiveBrokersService {
         return await this.makeRequest(config);
     }
 
+    // Contract
+
+    async secdefByConid(conids: number[]): Promise<IBTypes.SecurityDefinition[]> {
+        return await this.post('/trsrv/secdef', { conids: conids });
+    }
+
     async getBrokerageAccounts(): Promise<IBTypes.BrokerageAccounts> {
         return await this.get(`/iserver/accounts`);
     }
