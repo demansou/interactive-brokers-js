@@ -66,6 +66,10 @@ class InteractiveBrokersService {
         return await this.post('/trsrv/secdef', { conids: conids });
     }
 
+    async getTradingScheduleForSymbol(assetClass: string, symbol: string, exchange: string, exchangeFilter: string): Promise<IBTypes.TradingScheduleForSymbol> {
+        return await this.get(`/trsrv/secdef/schedule?assetClass=${assetClass}&symbol=${symbol}&exchange=${exchange}&exchangeFilter=${exchangeFilter}`);
+    }
+
     async getBrokerageAccounts(): Promise<IBTypes.BrokerageAccounts> {
         return await this.get(`/iserver/accounts`);
     }

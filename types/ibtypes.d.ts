@@ -259,6 +259,27 @@ declare module 'IBTypes' {
         RESULT: boolean
         AUTH_TIME: number
     }
+    export interface TradingSchedule {
+        clearingCycleEndTime: number
+        tradingScheduleDate: number
+        sessions: TradingScheduleSession
+        tradingTimes: TradingScheduleTradingTimes
+    }
+    export interface TradingScheduleForSymbol {
+        id: string
+        tradeVenueId: string
+        schedules: TradingSchedule[]
+    }
+    export interface TradingScheduleSession {
+        openingTime: number
+        closingTime: number
+        prop: string
+    }
+    export interface TradingScheduleTradingTimes {
+        openingTime: number
+        closingTime: number
+        cancelDayOrders: string
+    }
     export interface WhatIfAmount {
         amount: string
         commission: string
