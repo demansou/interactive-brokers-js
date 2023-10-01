@@ -45,7 +45,17 @@ class IBContractService extends BaseService {
         throw Error('Not yet implemented!');
     }
 
-    
+    async getAlgoParams(conid: number, algos: string[], addDescription: 0 | 1, addParams: 0 | 1) : Promise<any> {
+        throw Error('Not yet implemented!');
+    }
+
+    async postContractRules(conid: number, isBuy: boolean): Promise<any> {
+        throw Error('Not yet implemented!');
+    }
+
+    async getInfoAndRules(conid: number, isBuy: boolean): Promise<any> {
+        throw Error('Not yet implemented!');
+    }
 }
 
 export default IBContractService;
