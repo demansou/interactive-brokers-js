@@ -27,6 +27,17 @@ class IBContractService extends BaseService {
     async getContractDetails(conid: number): Promise<IBTypes.ContractDetails> {
         return await this.get(`/iserver/contract/${conid}/info`);
     }
+
+    async searchBySymbolOrName(symbol: string, isName: boolean, secType: string): Promise<IBTypes.SecuritySearchResult> {
+        const searchTerms: IBTypes.SecuritySearchTerms = {
+            symbol: symbol,
+            name: isName,
+            secType: secType
+        };
+        return await this.post('/iserver/secdef/search', searchTerms);
+    }
+
+
 }
 
 export default IBContractService;

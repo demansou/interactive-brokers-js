@@ -272,6 +272,30 @@ declare module 'IBTypes' {
     export interface SecurityFutures {
         [key: string]: FuturesInfo[]
     }
+    export interface SecuritySearchTerms {
+        symbol: string
+        name: boolean
+        secType: string
+    }
+    export interface SecuritySearchResult {
+        conid: number
+        companyHeader: string
+        companyName: string
+        symbol: string
+        description: string
+        restricted: string
+        fop: string
+        opt: string
+        war: string
+        sections: SecuritySearchSection[]
+    }
+    export interface SecuritySearchSection {
+        secType: string
+        months: string
+        symbol: string
+        exchange: string
+        legSecType: string
+    }
     export interface SecurityStocks {
         [key: string]: StocksInfo[]
     }
