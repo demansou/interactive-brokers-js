@@ -112,29 +112,55 @@ class InteractiveBrokersService {
         return await this.marketDataService.marketDataCancelAll();
     }
 
-    async getBrokerageAccounts(): Promise<IBTypes.BrokerageAccounts> {
-        return await this.get(`/iserver/accounts`);
+    async getMarketDataHistory(conid: number, exchange: string | undefined, period: IBTypes.MarketDataHistoryPeriod, bar: IBTypes.MarketDataHistoryBar, outsideRth: boolean): Promise<IBTypes.MarketDataHistory> {
+        return await this.marketDataService.getMarketDataHistory(conid, exchange, period, bar, outsideRth);
     }
+
+    // Scanner
+
+    // Portfolio Analyst
+
+    // Account
 
     async getAccountSummary(accountId: string): Promise<IBTypes.AccountSummary> {
         return await this.get(`/portfolio/${accountId}/summary`);
     }
 
+    async getBrokerageAccounts(): Promise<IBTypes.BrokerageAccounts> {
+        return await this.get(`/iserver/accounts`);
+    }
+
+    // Portfolio
+
     async getPositionByContractId(accountId: string, conId: number): Promise<IBTypes.PositionByContractId> {
         return await this.get(`/portfolio/${accountId}/position/${conId}`);
+    }
+
+    // Trades
+
+    // Alert
+
+    // Order
+
+    async postOrder(accountId: string, order: IBTypes.Orders): Promise<IBTypes.OrdersFeedback> {
+        return await this.post(`/iserver/account/${accountId}/orders`, order);
     }
 
     async postPreviewOrder(accountId: string, order: IBTypes.Orders): Promise<IBTypes.WhatIfOrdersFeedback> {
         return await this.post(`/iserver/account/${accountId}/orders/whatif`, order);
     }
 
-    async postOrder(accountId: string, order: IBTypes.Orders): Promise<IBTypes.OrdersFeedback> {
-        return await this.post(`/iserver/account/${accountId}/orders`, order);
-    }
-
     async postOrderReply(replyId: string, feedbackReply: IBTypes.OrdersFeedbackReply): Promise<IBTypes.OrderReplyResponse[]> {
         return await this.post(`/iserver/reply/${replyId}`, feedbackReply);
     }
+    
+    // PnL
+
+
+
+
+
+
 
     private async get<T>(path: string): Promise<T> {
         const config: AxiosRequestConfig = {

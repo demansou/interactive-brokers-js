@@ -27,6 +27,10 @@ class IBMarketDataService extends BaseService {
     async marketDataCancelAll(): Promise<IBTypes.MarketDataCancelConfirmation> {
         return await this.get('/iserver/marketdata/unsubscribeall');
     }
+
+    async getMarketDataHistory(conid: number, exchange: string | undefined, period: IBTypes.MarketDataHistoryPeriod, bar: IBTypes.MarketDataHistoryBar, outsideRth: boolean): Promise<IBTypes.MarketDataHistory> {
+        return await this.get(`/iserver/marketdata/history?conid=${conid}&exchange=${exchange}&period=${period}&bar=${bar}&outsideRth=${outsideRth}`);
+    }
 }
 
 export default IBMarketDataService;
