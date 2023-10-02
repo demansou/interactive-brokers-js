@@ -151,6 +151,29 @@ declare module 'IBTypes' {
     export interface MarketDataAggregate {
         [key: number]: MarketData
     }
+    export interface MarketDataHistory {
+        bars: MarketDataHistoryBars
+    }
+    export type MarketDataHistoryBar = 'min' | 'h' | 'd' | 'w' | 'm'
+    export interface MarketDataHistoryBars {
+        open: number
+        startTime: string
+        startTimeVal: number
+        endTime: string
+        endTimeVal: number
+        points: number
+        data: MarketDataHistoryBarsData[]
+        mktDataDelay: number
+    }
+    export interface MarketDataHistoryBarsData {
+        t: number
+        o: number
+        c: number
+        h: number
+        l: number
+        v: number
+    }
+    export type MarketDataHistoryPeriod = 'min' | 'h' | 'd' | 'w' | 'm' | 'y'
     export interface Order {
         acctId: string
         conid: number

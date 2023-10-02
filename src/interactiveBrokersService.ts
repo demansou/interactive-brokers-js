@@ -87,6 +87,10 @@ class InteractiveBrokersService {
 
     // Market Data
 
+    async getMarketDataHistoryBeta(conid: number, period: IBTypes.MarketDataHistoryPeriod, bar: IBTypes.MarketDataHistoryBar, outsideRth: boolean): Promise<IBTypes.MarketDataHistory> {
+        return await this.marketDataService.getMarketDataHistoryBeta(conid, period, bar, outsideRth)
+    }
+
     async getMarketData(conIds: number[], since: number, fields: number[]): Promise<IBTypes.MarketDataAggregate> {
         return await this.marketDataService.getMarketData(conIds, since, fields);
     }
