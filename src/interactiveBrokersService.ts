@@ -91,10 +91,26 @@ class InteractiveBrokersService {
         return await this.marketDataService.getMarketDataHistoryBeta(conid, period, bar, outsideRth)
     }
 
-    async getMarketData(conIds: number[], since: number, fields: number[]): Promise<IBTypes.MarketDataAggregate> {
-        return await this.marketDataService.getMarketData(conIds, since, fields);
+    async getMarketDataSnapshotBeta(conIds: string[], fields: number[]): Promise<IBTypes.MarketDataAggregate> {
+        return await this.marketDataService.getMarketDataSnapshotBeta(conIds, fields);
     }
 
+    // For package version compatibility. Some early versions had this instead of getMarketDataSnapshot.
+    async getMarketData(conIds: number[], since: number, fields: number[]): Promise<IBTypes.MarketDataAggregate> {
+        return await this.getMarketDataSnapshot(conIds, since, fields);
+    }
+
+    async getMarketDataSnapshot(conIds: number[], since: number, fields: number[]): Promise<IBTypes.MarketDataAggregate> {
+        return await this.marketDataService.getMarketDataSnapshot(conIds, since, fields);
+    }
+
+    async marketDataCancel(conId: number): Promise<IBTypes.MarketDataCancelConfirmation> {
+        return await this.marketDataService.marketDataCancel(conId);
+    }
+
+    async marketDataCancelAll(): Promise<IBTypes.MarketDataCancelConfirmation> {
+        return await this.marketDataService.marketDataCancelAll();
+    }
 
     async getBrokerageAccounts(): Promise<IBTypes.BrokerageAccounts> {
         return await this.get(`/iserver/accounts`);

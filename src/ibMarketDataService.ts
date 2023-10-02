@@ -12,8 +12,20 @@ class IBMarketDataService extends BaseService {
         return await this.get(`/hmds/history?conid=${conid}&period=${period}&bar=${bar}&outsideRth=${outsideRth}`);
     }
 
-    async getMarketData(conIds: number[], since: number, fields: number[]): Promise<IBTypes.MarketDataAggregate> {
+    async getMarketDataSnapshotBeta(conIds: string[], fields: number[]): Promise<IBTypes.MarketDataAggregate> {
+        return await this.get(`/md/snapshot?conids=${conIds.join(',')}&fields=${fields.join(',')}`);
+    }
+
+    async getMarketDataSnapshot(conIds: number[], since: number, fields: number[]): Promise<IBTypes.MarketDataAggregate> {
         return await this.get(`/iserver/marketdata/snapshot?conids=${conIds.join(',')}&since=${since}&fields=${fields.join(',')}`)
+    }
+
+    async marketDataCancel(conId: number): Promise<IBTypes.MarketDataCancelConfirmation> {
+        return await this.get(`/iserver/marketata/${conId}/unsubscribe`);
+    }
+
+    async marketDataCancelAll(): Promise<IBTypes.MarketDataCancelConfirmation> {
+        return await this.get('/iserver/marketdata/unsubscribeall');
     }
 }
 

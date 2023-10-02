@@ -148,8 +148,114 @@ declare module 'IBTypes' {
         conId: number
         server_id: string
     }
+    export interface MarketDataBeta {
+        "31": string
+        "70": number
+        "71": number
+        "82": string
+        "83": number
+        "84": string
+        "85": string
+        "86": string
+        "87": string
+        "88": string
+        "6509": string
+        "7057": string
+        "7058": string
+        "7059": number
+        "7068": string
+        "7195": string
+        "7196": string
+        "7197": string
+        "7198": string
+        "7199": string
+        "7200": string
+        "7201": string
+        "7202": string
+        "7203": string
+        "7204": string
+        "7205": string
+        "7206": string
+        "7207": string
+        "7208": string
+        "7209": string
+        "7210": string
+        "7211": string
+        "7212": string
+        "7245": string
+        "7246": string
+        "7247": string
+        "7248": string
+        "7249": string
+        "7263": string
+        "7264": string
+        "7265": string
+        "7266": string
+        "7267": string
+        "7268": string
+        "7269": string
+        "7271": string
+        "7272": string
+        "7273": string
+        "7274": string
+        "7275": string
+        "7276": string
+        "7277": string
+        "7282": string
+        "7283": string
+        "7284": string
+        "7286": number
+        "7287": string
+        "7288": string
+        "7289": string
+        "7290": string
+        "7293": string
+        "7294": string
+        "7295": number
+        "7296": number
+        "7331": string
+        "7370": string
+        "7371": string
+        "7372": string
+        "7635": string
+        "7636": number
+        "7637": string
+        "7644": string
+        "7674": string
+        "7675": string
+        "7676": string
+        "7677": string
+        "7681": string
+        "7698": string
+        "7699": string
+        "7718": string
+        "7720": string
+        "7743": string
+        "7761": string
+        "7992": string
+        "7993": string
+        "7994": string
+        "7995": string
+        "conid": number
+        "minTick": number
+        "BboExchange": string
+        "HasDelayed": boolean
+        "sizeMinTick": number
+        "BestEligible": number
+        "BestBidExch": number
+        "BestAskExch": number
+        "PreOpenBid": number
+        "LastAttribs": number
+        "TimestampBase": number
+        "TimestampDelta": number
+        "LastExch": number
+        "CloseAttribs": number
+    }
     export interface MarketDataAggregate {
         [key: number]: MarketData
+    }
+    export interface MarketDataCancelConfirmation {
+        confirmed: string
     }
     export interface MarketDataHistory {
         bars: MarketDataHistoryBars
