@@ -1,21 +1,26 @@
-import axios, { AxiosRequestConfig } from 'axios';
-import https from 'https';
 import * as IBTypes from 'IBTypes';
 import IBContractService from './ibContractService';
 import IBSessionService from './ibSessionService';
 import IBMarketDataService from './ibMarketDataService';
+import IBAccountService from './ibaccountService';
+import IBPortfolioService from './ibPortfolioService';
+import IBOrderService from './ibOrderService';
 
 class InteractiveBrokersService {
-    private baseUrl: string;
     private contractService: IBContractService;
     private sessionService: IBSessionService;
     private marketDataService: IBMarketDataService;
+    private accountService: IBAccountService;
+    private portfolioService: IBPortfolioService;
+    private orderService: IBOrderService;
 
     constructor(baseUrl: string) {
-        this.baseUrl = baseUrl;
         this.contractService = new IBContractService(baseUrl);
         this.sessionService = new IBSessionService(baseUrl);
         this.marketDataService = new IBMarketDataService(baseUrl);
+        this.accountService = new IBAccountService(baseUrl);
+        this.portfolioService = new IBPortfolioService(baseUrl);
+        this.orderService = new IBOrderService(baseUrl);
     }
 
     // Session
@@ -123,17 +128,17 @@ class InteractiveBrokersService {
     // Account
 
     async getAccountSummary(accountId: string): Promise<IBTypes.AccountSummary> {
-        return await this.get(`/portfolio/${accountId}/summary`);
+        return await this.accountService.getAccountSummary(accountId);
     }
 
     async getBrokerageAccounts(): Promise<IBTypes.BrokerageAccounts> {
-        return await this.get(`/iserver/accounts`);
+        return await this.accountService.getBrokerageAccounts();
     }
 
     // Portfolio
 
     async getPositionByContractId(accountId: string, conId: number): Promise<IBTypes.PositionByContractId> {
-        return await this.get(`/portfolio/${accountId}/position/${conId}`);
+        return await this.portfolioService.getPositionByContractId(accountId, conId);
     }
 
     // Trades
@@ -143,79 +148,18 @@ class InteractiveBrokersService {
     // Order
 
     async postOrder(accountId: string, order: IBTypes.Orders): Promise<IBTypes.OrdersFeedback> {
-        return await this.post(`/iserver/account/${accountId}/orders`, order);
+        return await this.orderService.postOrder(accountId, order);
     }
 
     async postPreviewOrder(accountId: string, order: IBTypes.Orders): Promise<IBTypes.WhatIfOrdersFeedback> {
-        return await this.post(`/iserver/account/${accountId}/orders/whatif`, order);
+        return await this.orderService.postPreviewOrder(accountId, order);
     }
 
     async postOrderReply(replyId: string, feedbackReply: IBTypes.OrdersFeedbackReply): Promise<IBTypes.OrderReplyResponse[]> {
-        return await this.post(`/iserver/reply/${replyId}`, feedbackReply);
+        return await this.orderService.postOrderReply(replyId, feedbackReply);
     }
-    
+
     // PnL
-
-
-
-
-
-
-
-    private async get<T>(path: string): Promise<T> {
-        const config: AxiosRequestConfig = {
-            method: 'GET',
-            url: `${this.baseUrl}${path}`,
-            headers: {
-                'Accept': 'application/json',
-            },
-            httpsAgent: new https.Agent({
-                rejectUnauthorized: false,
-            }),
-        }
-
-        return await this.makeRequest<T>(config);
-    }
-
-    private async post<TRequestBody, TResponse>(path: string, requestBody: TRequestBody): Promise<TResponse> {
-        const config: AxiosRequestConfig = {
-            method: 'POST',
-            url: `${this.baseUrl}${path}`,
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            data: JSON.stringify(requestBody),
-            httpsAgent: new https.Agent({
-                rejectUnauthorized: false,
-            }),
-        }
-
-        return await this.makeRequest<TResponse>(config);
-    }
-
-    private async makeRequest<T>(config: AxiosRequestConfig): Promise<T> {
-        try {
-            console.log('Sending request:', config);
-            const { data } = await axios.request<T>(config);
-            console.log('Received response:', data);
-            return data;
-        } catch (err: any) {
-            if (err.response && err.response.data && err.response.data.error) {
-                console.error('An error occurred:', err.response.data.error);
-            }
-            else if (err.response && err.response.data) {
-                console.error('An error occurred:', err.response.data);
-            }
-            else if (err.response) {
-                console.error('An error occurred:', err.response);
-            }
-            else  {
-                console.error('An error occurred:', err);
-            }
-            throw err;
-        }
-    }
 }
 
 export default InteractiveBrokersService;

@@ -1,5 +1,3 @@
-import { AxiosRequestConfig } from "axios";
-import https from 'https';
 import BaseService from "./baseService";
 import * as IBTypes from 'IBTypes';
 
