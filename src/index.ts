@@ -3,6 +3,5 @@ import * as IBTypes from 'IBTypes';
 
 export {
     IBTypes,
+    InteractiveBrokersService
 };
-
-export default InteractiveBrokersService;

@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from "axios";
 import https from 'https';
-import BaseService from "./baseService";
+import { BaseService } from "./baseService";
 import * as IBTypes from 'IBTypes';
 
 class IBSessionService extends BaseService {
@@ -59,4 +59,4 @@ class IBSessionService extends BaseService {
     }
 }
 
-export default IBSessionService;
+export { IBSessionService };

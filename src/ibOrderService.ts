@@ -1,4 +1,4 @@
-import BaseService from "./baseService";
+import { BaseService } from "./baseService";
 import * as IBTypes from 'IBTypes';
 
 class IBOrderService extends BaseService {

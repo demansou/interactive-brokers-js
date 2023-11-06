@@ -1,4 +1,4 @@
-import BaseService from "./baseService";
+import { BaseService } from "./baseService";
 import * as IBTypes from 'IBTypes';
 
 class IBPortfolioService extends BaseService {
@@ -11,4 +11,4 @@ class IBPortfolioService extends BaseService {
     }
 }
 
-export default IBPortfolioService;
+export { IBPortfolioService };

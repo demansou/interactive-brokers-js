@@ -1,9 +1,9 @@
 import * as IBTypes from 'IBTypes';
-import IBContractService from './ibContractService';
-import IBSessionService from './ibSessionService';
-import IBMarketDataService from './ibMarketDataService';
-import IBAccountService from './ibaccountService';
-import IBPortfolioService from './ibPortfolioService';
+import { IBContractService } from './ibContractService';
+import { IBSessionService } from './ibSessionService';
+import { IBMarketDataService } from './ibMarketDataService';
+import { IBAccountService } from './ibaccountService';
+import { IBPortfolioService } from './ibPortfolioService';
 import IBOrderService from './ibOrderService';
 
 class InteractiveBrokersService {

@@ -64,4 +64,4 @@ class BaseService {
     }
 }
 
-export default BaseService;
+export { BaseService };

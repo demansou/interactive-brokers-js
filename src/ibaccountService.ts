@@ -1,4 +1,4 @@
-import BaseService from "./baseService";
+import { BaseService } from "./baseService";
 import * as IBTypes from 'IBTypes';
 
 class IBAccountService extends BaseService {
@@ -15,4 +15,4 @@ class IBAccountService extends BaseService {
     }
 }
 
-export default IBAccountService;
+export { IBAccountService };

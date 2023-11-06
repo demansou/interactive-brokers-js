@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "../../../volatility-trader-functions"
+		},
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../volatility-consumer-database"
+		},
+		{
+			"path": "../../../volatility-worker-js"
+		}
+	],
+	"settings": {
+		"debug.internalConsoleOptions": "neverOpen"
+	}
+}
